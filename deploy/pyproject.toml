@@ -1,0 +1,26 @@
+[project]
+name = "humanoid-dodgeball-deploy"
+version = "0.1.0"
+description = "On-robot single-camera depth-dodge deploy for the Unitree G1 (Jetson Orin / Ubuntu 20.04)."
+# Python 3.8 to match the JetPack 5.x system python on the Jetson Orin.
+requires-python = ">=3.8,<3.9"
+dependencies = [
+    # 1.24.x is the last 3.8 series.
+    "numpy>=1.21,<1.25",
+    # CPU execution provider; comfortable py3.8 aarch64 manylinux2014 wheel.
+    "onnxruntime==1.16.3",
+    # camera_node --view debug window (raw | masked depth). GUI build (not
+    # -headless) so cv2.imshow works on the Jetson desktop / ssh -X.
+    "opencv-python>=4.5,<5",
+]
+
+# Installed OUT OF BAND, not resolved by uv:
+#   pyzed  -> the local ZED-SDK-for-L4T cp38 wheel:
+#               uv pip install --python deploy/.venv/bin/python /usr/local/zed/pyzed-*-cp38-*.whl
+#             (the get_python_api.py pip step fails on Jetson; install the wheel directly.)
+#   unitree_interface.so -> built by install_unitree_sdk.sh into the deploy venv.
+#   torch/torchvision (EfficientTAM only) -> Jetson aarch64 wheels via
+#             deploy/tools/fetch_jetson_etam_wheels.sh (see deploy/wheels/README.md).
+
+[tool.uv]
+# No torch on the robot.

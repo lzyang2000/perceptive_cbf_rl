@@ -1,0 +1,50 @@
+# Python bytecode/cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build and packaging artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+
+# Test and coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+
+# IDE/editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training outputs
+logs/
+wandb/
+outputs/
+output/
+
+# Motion-retargeting scratch outputs (csv_to_npz.py)
+motion_data_npz/
+
+# Rendered media / benchmark dumps
+*.mp4
+*_rec*.npz
+showcase/
+
+# Deploy-side local state (py3.8 venv, recordings, fetched wheels/weights)
+deploy/.venv/
+deploy/wheels/*.whl
+deploy/common/etam_clips/
+deploy/*_rec*.npz
+deploy/recordings/

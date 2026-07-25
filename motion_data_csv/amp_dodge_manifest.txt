@@ -1,0 +1,26 @@
+# Curated NVIDIA SEED G1 clips for the dodgeball AMP style prior.
+#
+# These are *standing / in-place* evasive motions (no flight phase) -- a different
+# motion class from the amp_leap set. Direction labels (L/R) are the body's evasion
+# direction; "_M" clips are the dataset's mirror versions (left<->right flipped).
+#
+# Format: <absolute path to SEED g1 csv>  [start:end]   ('#' comments allowed)
+# (start:end is 1-indexed inclusive on the SEED 120 fps frames; raw/untrimmed for now.)
+#
+# NOTE: the runtime AMP loader globs a *directory of .npz files* -- it does NOT read this
+# manifest (the manifest is only a build recipe for scripts/seed_g1_to_amp_csv.py +
+# scripts/csv_to_npz.py). The combined dodgeball prior ALSO includes the 24 amp_leap
+# clips: those .npz are copied into the dodge motion dir verbatim from the committed
+# artifacts at src/assets/motions/g1/amp_leap/Leap/ (recipe: amp_leap_manifest.txt), so
+# they are not re-listed here to avoid drifting from that manifest.
+
+# ---- Reactive dodges (subject A437, 230731). "up" dropped per review. ----
+<SEED_ROOT>/g1/csv/230731/ib_dodge_down_L_002__A437.csv
+<SEED_ROOT>/g1/csv/230731/ib_dodge_back_L_001__A437.csv
+<SEED_ROOT>/g1/csv/230731/ib_dodge_back_L_002__A437.csv
+<SEED_ROOT>/g1/csv/230731/ib_dodge_270_R_001__A437.csv
+<SEED_ROOT>/g1/csv/230731/ib_dodge_270_R_003__A437.csv
+
+# ---- One-foot balance stance (subject A533, 240327) + its left/right mirror ----
+<SEED_ROOT>/g1/csv/240327/one_leg_idle_R_002__A533.csv
+<SEED_ROOT>/g1/csv/240327/one_leg_idle_R_002__A533_M.csv

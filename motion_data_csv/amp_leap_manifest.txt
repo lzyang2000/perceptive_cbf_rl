@@ -1,0 +1,57 @@
+# Curated NVIDIA SEED G1 leap clips for the AMP leap / leap-to-goal tasks.
+#
+# Direction is the body's translation during the leap. "_M" clips are the dataset's
+# mirror versions (left<->right flipped), used to make the style distribution
+# left/right symmetric.
+#
+# Each line has an optional trailing "start:end" frame range (1-indexed, inclusive, on
+# the SEED 120 fps frames). The ranges trim the long standing/idle tails around each
+# single jump so the AMP reference distribution is ~75% dynamic / ~25% standing (the raw
+# clips are ~58% standing, which over-rewards standing). The kept window is the
+# crouch+jump+land plus ~0.24 s of standing margin on each side.
+#
+# Clips with no genuine both-feet flight phase (measured from body_pos_w: backward A041,
+# sideway_045, sideway_135 -- all weight-shift steps, not real leaps) were dropped so the
+# AMP discriminator's notion of "leap" is unambiguously "leaves the ground".
+#
+# Format: <absolute path to SEED g1 csv>  [start:end]
+
+# ---- Forward leaps (+vx): jump_forward (mirror is also forward) ----
+<SEED_ROOT>/g1/csv/220728/jump_forward_001__A041.csv  150:435
+<SEED_ROOT>/g1/csv/220728/jump_forward_001__A042.csv  20:308
+<SEED_ROOT>/g1/csv/220728/jump_forward_001__A043.csv  222:522
+<SEED_ROOT>/g1/csv/220728/jump_forward_001__A041_M.csv  150:435
+
+# ---- Backward leaps (-vx): jump_backward (mirror is also backward) ----
+# (002 A041 + mirror dropped: no flight phase -- a weight-shift step, not a leap.)
+# A044/A033 screened for clean flight (~0.19-0.20 s) and no post-landing stumble.
+<SEED_ROOT>/g1/csv/220728/jump_backward_002__A042.csv  1:301
+<SEED_ROOT>/g1/csv/220728/jump_backward_002__A043.csv  1:306
+<SEED_ROOT>/g1/csv/220728/jump_backward_002__A044.csv  145:303
+<SEED_ROOT>/g1/csv/220721/jump_backward_001__A033.csv  1:172
+
+# ---- Left leaps (+vy): jump_left + jump_sideway_090 ----
+<SEED_ROOT>/g1/csv/220728/jump_left_001__A041.csv  75:308
+<SEED_ROOT>/g1/csv/220728/jump_left_001__A042.csv  1:265
+<SEED_ROOT>/g1/csv/220713/jump_sideway_090_001__A021.csv  224:433
+<SEED_ROOT>/g1/csv/220713/jump_sideway_090_001__A022.csv  157:435
+
+# ---- Right leaps (-vy): mirrors of the left clips ----
+<SEED_ROOT>/g1/csv/220728/jump_left_001__A041_M.csv  75:308
+<SEED_ROOT>/g1/csv/220728/jump_left_001__A042_M.csv  1:265
+<SEED_ROOT>/g1/csv/220713/jump_sideway_090_001__A021_M.csv  224:433
+<SEED_ROOT>/g1/csv/220713/jump_sideway_090_001__A022_M.csv  157:435
+
+# ---- Diagonal leaps: back-left/right (045) and forward-left/right (135) + mirrors ----
+# Screened from all 045/135 SEED takes for a genuine both-feet flight phase AND no
+# post-landing stumble (see scripts: FK foot-height + settle check). The original
+# 045_001/135_003 recordings were dropped (grounded steps); A024 takes were dropped as
+# too explosive. These are the clean, moderate-flight (~0.17-0.30 s) takes.
+<SEED_ROOT>/g1/csv/220720/jump_sideway_045_004__A030.csv  84:254
+<SEED_ROOT>/g1/csv/220727/jump_sideway_045_002__A040.csv  1:172
+<SEED_ROOT>/g1/csv/220720/jump_sideway_045_004__A030_M.csv  84:254
+<SEED_ROOT>/g1/csv/220727/jump_sideway_045_002__A040_M.csv  1:172
+<SEED_ROOT>/g1/csv/220721/jump_sideway_135_004__A033.csv  19:185
+<SEED_ROOT>/g1/csv/220727/jump_sideway_135_004__A037.csv  13:188
+<SEED_ROOT>/g1/csv/220721/jump_sideway_135_004__A033_M.csv  19:185
+<SEED_ROOT>/g1/csv/220727/jump_sideway_135_004__A037_M.csv  13:188

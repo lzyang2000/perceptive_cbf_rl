@@ -1,0 +1,58 @@
+[project]
+name = "perceptive_cbf_rl"
+version = "0.0.1"
+description = "PAC-MAN: Perception-Aware CBF-RL for whole-body safety in humanoid dodgeball (Unitree G1, mjlab + rsl_rl)."
+requires-python = ">=3.11,<3.12"
+
+# Top-level dependencies.
+#
+# mjlab is consumed from its git tag v1.5.3. It pins the matched simulator trio
+# (mujoco~=3.10.0 + mujoco-warp~=3.10.0), both stable PyPI releases, and
+# `rsl-rl-lib==5.4.0`; the AMP runner/algorithm here are a thin overload of
+# stock rsl_rl (see src/tasks/amp_loco/rl/).
+#
+# torch is taken from the cu128 index: the default torch>=2.10 wheels target CUDA 13
+# and fail at runtime ("NVIDIA driver is too old") on CUDA 12.x drivers.
+dependencies = [
+  "mjlab",
+  "torch==2.9.1",
+  "torchvision==0.24.1",
+  "scipy>=1.13",
+  "imageio[ffmpeg]>=2.34",
+  "tyro>=1.0.1",
+]
+
+[tool.uv]
+# This repo is run from source (scripts import `src.*` from the repo root); it is
+# NOT installed as a package. `uv sync` therefore only provisions dependencies.
+package = false
+# Resolve only for this platform (matches the CUDA training target).
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[tool.uv.sources]
+# mjlab from its git tag v1.5.3 (no matching PyPI release).
+mjlab = { git = "https://github.com/mujocolab/mjlab", tag = "v1.5.3" }
+# mjlab's own [tool.uv] index routing is NOT inherited by consumers, so
+# replicate the bits it needs (warp-lang nightly index + cu128 torch).
+warp-lang = { index = "nvidia", marker = "sys_platform != 'darwin'" }
+# cu128 torch wheels (compatible with CUDA 12.9 drivers).
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+
+[[tool.uv.index]]
+name = "nvidia"
+url = "https://pypi.nvidia.com/"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

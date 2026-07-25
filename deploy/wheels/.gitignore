@@ -1,0 +1,7 @@
+# Jetson aarch64 wheels mirror (see README.md). The torch wheel is ~170 MB -- too big for
+# git; fetch it with deploy/tools/fetch_jetson_etam_wheels.sh (checksum-pinned in SHA256SUMS).
+# The torchvision wheel is not shipped either: build it once on a JP5 Jetson (README.md)
+# and drop it here; the exception below lets you commit it to your own fork if you want
+# later robots to skip the build.
+*.whl
+!torchvision-*.whl
