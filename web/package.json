@@ -1,0 +1,30 @@
+{
+  "name": "perceptive-cbf-rl-web-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Browser demo: G1 dodgeball policy (ONNX) + MuJoCo physics, fully client-side.",
+  "scripts": {
+    "gen": "node tools/gen_model.mjs",
+    "meshes": "node tools/gen_meshes.mjs",
+    "weights": "node tools/gen_weights.mjs",
+    "prepare-assets": "npm run gen && npm run meshes && npm run weights",
+    "headless": "node tools/headless.mjs",
+    "sweep": "node tools/sweep.mjs",
+    "trace": "node tools/trace.mjs",
+    "xcheck": "python3 tools/xcheck_obs.py > .obs_ref.json && node tools/xcheck_obs.mjs .obs_ref.json",
+    "verify-mlp": "node tools/verify_mlp.mjs",
+    "verify": "npm run xcheck && npm run verify-mlp && npm run headless",
+    "dev": "npm run prepare-assets && vite",
+    "build": "npm run prepare-assets && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mujoco/mujoco": "^3.10.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0",
+    "onnxruntime-web": "^1.23.0"
+  }
+}
