@@ -1,0 +1,355 @@
+{
+  "positionBytes": 343596,
+  "meshes": [
+    {
+      "name": "pelvis",
+      "file": "pelvis.STL",
+      "vertexOffset": 0,
+      "vertexCount": 846,
+      "indexOffset": 0,
+      "indexCount": 5265,
+      "srcTriangles": 21216,
+      "triangles": 1755
+    },
+    {
+      "name": "pelvis_contour_link",
+      "file": "pelvis_contour_link.STL",
+      "vertexOffset": 846,
+      "vertexCount": 1341,
+      "indexOffset": 5265,
+      "indexCount": 12126,
+      "srcTriangles": 36102,
+      "triangles": 4042
+    },
+    {
+      "name": "left_hip_pitch_link",
+      "file": "left_hip_pitch_link.STL",
+      "vertexOffset": 2187,
+      "vertexCount": 682,
+      "indexOffset": 17391,
+      "indexCount": 4266,
+      "srcTriangles": 3632,
+      "triangles": 1422
+    },
+    {
+      "name": "left_hip_roll_link",
+      "file": "left_hip_roll_link.STL",
+      "vertexOffset": 2869,
+      "vertexCount": 664,
+      "indexOffset": 21657,
+      "indexCount": 4314,
+      "srcTriangles": 3842,
+      "triangles": 1438
+    },
+    {
+      "name": "left_hip_yaw_link",
+      "file": "left_hip_yaw_link.STL",
+      "vertexOffset": 3533,
+      "vertexCount": 884,
+      "indexOffset": 25971,
+      "indexCount": 6165,
+      "srcTriangles": 5924,
+      "triangles": 2055
+    },
+    {
+      "name": "left_knee_link",
+      "file": "left_knee_link.STL",
+      "vertexOffset": 4417,
+      "vertexCount": 850,
+      "indexOffset": 32136,
+      "indexCount": 6645,
+      "srcTriangles": 17096,
+      "triangles": 2215
+    },
+    {
+      "name": "left_ankle_pitch_link",
+      "file": "left_ankle_pitch_link.STL",
+      "vertexOffset": 5267,
+      "vertexCount": 460,
+      "indexOffset": 38781,
+      "indexCount": 2760,
+      "srcTriangles": 1422,
+      "triangles": 920
+    },
+    {
+      "name": "left_ankle_roll_link",
+      "file": "left_ankle_roll_link.STL",
+      "vertexOffset": 5727,
+      "vertexCount": 882,
+      "indexOffset": 41541,
+      "indexCount": 7605,
+      "srcTriangles": 13066,
+      "triangles": 2535
+    },
+    {
+      "name": "right_hip_pitch_link",
+      "file": "right_hip_pitch_link.STL",
+      "vertexOffset": 6609,
+      "vertexCount": 678,
+      "indexOffset": 49146,
+      "indexCount": 4242,
+      "srcTriangles": 3624,
+      "triangles": 1414
+    },
+    {
+      "name": "right_hip_roll_link",
+      "file": "right_hip_roll_link.STL",
+      "vertexOffset": 7287,
+      "vertexCount": 663,
+      "indexOffset": 53388,
+      "indexCount": 4308,
+      "srcTriangles": 3852,
+      "triangles": 1436
+    },
+    {
+      "name": "right_hip_yaw_link",
+      "file": "right_hip_yaw_link.STL",
+      "vertexOffset": 7950,
+      "vertexCount": 890,
+      "indexOffset": 57696,
+      "indexCount": 6201,
+      "srcTriangles": 5924,
+      "triangles": 2067
+    },
+    {
+      "name": "right_knee_link",
+      "file": "right_knee_link.STL",
+      "vertexOffset": 8840,
+      "vertexCount": 847,
+      "indexOffset": 63897,
+      "indexCount": 6606,
+      "srcTriangles": 17044,
+      "triangles": 2202
+    },
+    {
+      "name": "right_ankle_pitch_link",
+      "file": "right_ankle_pitch_link.STL",
+      "vertexOffset": 9687,
+      "vertexCount": 460,
+      "indexOffset": 70503,
+      "indexCount": 2760,
+      "srcTriangles": 1422,
+      "triangles": 920
+    },
+    {
+      "name": "right_ankle_roll_link",
+      "file": "right_ankle_roll_link.STL",
+      "vertexOffset": 10147,
+      "vertexCount": 881,
+      "indexOffset": 73263,
+      "indexCount": 7491,
+      "srcTriangles": 13074,
+      "triangles": 2497
+    },
+    {
+      "name": "waist_yaw_link",
+      "file": "waist_yaw_link_rev_1_0.STL",
+      "vertexOffset": 11028,
+      "vertexCount": 1492,
+      "indexOffset": 80754,
+      "indexCount": 11307,
+      "srcTriangles": 12398,
+      "triangles": 3769
+    },
+    {
+      "name": "waist_roll_link",
+      "file": "waist_roll_link_rev_1_0.STL",
+      "vertexOffset": 12520,
+      "vertexCount": 574,
+      "indexOffset": 92061,
+      "indexCount": 3444,
+      "srcTriangles": 1716,
+      "triangles": 1148
+    },
+    {
+      "name": "torso_link",
+      "file": "torso_link_rev_1_0.STL",
+      "vertexOffset": 13094,
+      "vertexCount": 1943,
+      "indexOffset": 95505,
+      "indexCount": 19101,
+      "srcTriangles": 51410,
+      "triangles": 6367
+    },
+    {
+      "name": "logo_link",
+      "file": "logo_link.STL",
+      "vertexOffset": 15037,
+      "vertexCount": 266,
+      "indexOffset": 114606,
+      "indexCount": 1620,
+      "srcTriangles": 4866,
+      "triangles": 540
+    },
+    {
+      "name": "head_link",
+      "file": "head_link.STL",
+      "vertexOffset": 15303,
+      "vertexCount": 1265,
+      "indexOffset": 116226,
+      "indexCount": 7980,
+      "srcTriangles": 18654,
+      "triangles": 2660
+    },
+    {
+      "name": "left_shoulder_pitch_link",
+      "file": "left_shoulder_pitch_link.STL",
+      "vertexOffset": 16568,
+      "vertexCount": 667,
+      "indexOffset": 124206,
+      "indexCount": 4164,
+      "srcTriangles": 3534,
+      "triangles": 1388
+    },
+    {
+      "name": "left_shoulder_roll_link",
+      "file": "left_shoulder_roll_link.STL",
+      "vertexOffset": 17235,
+      "vertexCount": 982,
+      "indexOffset": 128370,
+      "indexCount": 7707,
+      "srcTriangles": 8004,
+      "triangles": 2569
+    },
+    {
+      "name": "left_shoulder_yaw_link",
+      "file": "left_shoulder_yaw_link.STL",
+      "vertexOffset": 18217,
+      "vertexCount": 923,
+      "indexOffset": 136077,
+      "indexCount": 6168,
+      "srcTriangles": 4982,
+      "triangles": 2056
+    },
+    {
+      "name": "left_elbow_link",
+      "file": "left_elbow_link.STL",
+      "vertexOffset": 19140,
+      "vertexCount": 461,
+      "indexOffset": 142245,
+      "indexCount": 2766,
+      "srcTriangles": 1774,
+      "triangles": 922
+    },
+    {
+      "name": "left_wrist_roll_link",
+      "file": "left_wrist_roll_link.STL",
+      "vertexOffset": 19601,
+      "vertexCount": 650,
+      "indexOffset": 145011,
+      "indexCount": 4851,
+      "srcTriangles": 7122,
+      "triangles": 1617
+    },
+    {
+      "name": "left_wrist_pitch_link",
+      "file": "left_wrist_pitch_link.STL",
+      "vertexOffset": 20251,
+      "vertexCount": 322,
+      "indexOffset": 149862,
+      "indexCount": 1920,
+      "srcTriangles": 1718,
+      "triangles": 640
+    },
+    {
+      "name": "left_wrist_yaw_link",
+      "file": "left_wrist_yaw_link.STL",
+      "vertexOffset": 20573,
+      "vertexCount": 798,
+      "indexOffset": 151782,
+      "indexCount": 5916,
+      "srcTriangles": 6372,
+      "triangles": 1972
+    },
+    {
+      "name": "left_rubber_hand",
+      "file": "left_rubber_hand.STL",
+      "vertexOffset": 21371,
+      "vertexCount": 1235,
+      "indexOffset": 157698,
+      "indexCount": 7674,
+      "srcTriangles": 45748,
+      "triangles": 2558
+    },
+    {
+      "name": "right_shoulder_pitch_link",
+      "file": "right_shoulder_pitch_link.STL",
+      "vertexOffset": 22606,
+      "vertexCount": 668,
+      "indexOffset": 165372,
+      "indexCount": 4176,
+      "srcTriangles": 3534,
+      "triangles": 1392
+    },
+    {
+      "name": "right_shoulder_roll_link",
+      "file": "right_shoulder_roll_link.STL",
+      "vertexOffset": 23274,
+      "vertexCount": 982,
+      "indexOffset": 169548,
+      "indexCount": 7701,
+      "srcTriangles": 8036,
+      "triangles": 2567
+    },
+    {
+      "name": "right_shoulder_yaw_link",
+      "file": "right_shoulder_yaw_link.STL",
+      "vertexOffset": 24256,
+      "vertexCount": 922,
+      "indexOffset": 177249,
+      "indexCount": 6135,
+      "srcTriangles": 4998,
+      "triangles": 2045
+    },
+    {
+      "name": "right_elbow_link",
+      "file": "right_elbow_link.STL",
+      "vertexOffset": 25178,
+      "vertexCount": 463,
+      "indexOffset": 183384,
+      "indexCount": 2778,
+      "srcTriangles": 1774,
+      "triangles": 926
+    },
+    {
+      "name": "right_wrist_roll_link",
+      "file": "right_wrist_roll_link.STL",
+      "vertexOffset": 25641,
+      "vertexCount": 669,
+      "indexOffset": 186162,
+      "indexCount": 4812,
+      "srcTriangles": 7120,
+      "triangles": 1604
+    },
+    {
+      "name": "right_wrist_pitch_link",
+      "file": "right_wrist_pitch_link.STL",
+      "vertexOffset": 26310,
+      "vertexCount": 312,
+      "indexOffset": 190974,
+      "indexCount": 1860,
+      "srcTriangles": 1590,
+      "triangles": 620
+    },
+    {
+      "name": "right_wrist_yaw_link",
+      "file": "right_wrist_yaw_link.STL",
+      "vertexOffset": 26622,
+      "vertexCount": 771,
+      "indexOffset": 192834,
+      "indexCount": 5844,
+      "srcTriangles": 6828,
+      "triangles": 1948
+    },
+    {
+      "name": "right_rubber_hand",
+      "file": "right_rubber_hand.STL",
+      "vertexOffset": 27393,
+      "vertexCount": 1240,
+      "indexOffset": 198678,
+      "indexCount": 7689,
+      "srcTriangles": 43852,
+      "triangles": 2563
+    }
+  ]
+}

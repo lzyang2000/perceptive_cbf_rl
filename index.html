@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball">
+  <meta name="description" content="PAC-MAN couples control-barrier-function safety with deployment-realistic onboard sensing: a Unitree G1 humanoid dodges thrown balls from ball-only masked depth, trained with whole-body CBF rewards and an adversarial motion prior, deployed zero-shot on hardware (19/20 throws dodged, 0 falls).">
+  <meta name="keywords" content="humanoid robot, control barrier functions, safe reinforcement learning, CBF-RL, perception, depth camera, semantic segmentation, adversarial motion prior, Unitree G1, dodgeball">
+  <meta name="author" content="Lizhi Yang, Junheng Li, Aaron D. Ames">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="California Institute of Technology">
+  <meta property="og:title" content="PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball">
+  <meta property="og:description" content="A humanoid dodges thrown balls using only a head-mounted depth camera: whole-body CBF safety rewards, ball-only masked depth, and an adversarial motion prior, deployed zero-shot on the Unitree G1.">
+  <meta property="og:url" content="https://lzyang2000.github.io/perceptive_cbf_rl/">
+  <meta property="og:image" content="https://lzyang2000.github.io/perceptive_cbf_rl/static/images/head.jpg">
+  <meta property="og:image:alt" content="PAC-MAN teaser: Unitree G1 humanoid dodging thrown balls with onboard perception insets">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball">
+  <meta name="twitter:description" content="A humanoid dodges thrown balls using only a head-mounted depth camera: whole-body CBF safety rewards, ball-only masked depth, and an adversarial motion prior, deployed zero-shot on the Unitree G1.">
+  <meta name="twitter:image" content="https://lzyang2000.github.io/perceptive_cbf_rl/static/images/head.jpg">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball">
+  <meta name="citation_author" content="Yang, Lizhi">
+  <meta name="citation_author" content="Li, Junheng">
+  <meta name="citation_author" content="Ames, Aaron D.">
+  <meta name="citation_publication_date" content="2026">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#FF6C0C">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball</title>
+
+  <!-- Favicon and App Icons (the .ico bundles multiple resolutions) -->
+  <link rel="icon" href="static/images/favicon.ico?v=2" sizes="any">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png?v=1">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <!-- FontAwesome icons are rendered as inline SVG by fontawesome.all.min.js (loaded below); the
+       webfont CSS is intentionally omitted because this template does not ship the webfont files. -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- MathJax for the barrier equation -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, svg: { fontCache: 'global' } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball",
+    "description": "A perception-aware CBF-RL framework that couples control-barrier safety with deployment-realistic onboard sensing for whole-body humanoid dodgeball, deployed zero-shot on the Unitree G1.",
+    "author": [
+      { "@type": "Person", "name": "Lizhi Yang", "affiliation": { "@type": "Organization", "name": "California Institute of Technology" } },
+      { "@type": "Person", "name": "Junheng Li", "affiliation": { "@type": "Organization", "name": "California Institute of Technology" } },
+      { "@type": "Person", "name": "Aaron D. Ames", "affiliation": { "@type": "Organization", "name": "California Institute of Technology" } }
+    ],
+    "datePublished": "2026",
+    "url": "https://lzyang2000.github.io/perceptive_cbf_rl/",
+    "image": "https://lzyang2000.github.io/perceptive_cbf_rl/static/images/head.jpg",
+    "keywords": ["humanoid robot", "control barrier functions", "safe reinforcement learning", "perception", "adversarial motion prior", "Unitree G1"],
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <!-- Page-specific styling -->
+  <style>
+    /* Recolor the template accent from blue to Caltech orange */
+    :root {
+      --primary-color: #FF6C0C;
+      --primary-hover: #e85f00;
+      --accent-color: #FF6C0C;
+      --gradient-accent: linear-gradient(135deg, #ffb066 0%, #ff6c0c 100%);
+    }
+    .command-box {
+      background: #f5f7fb;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      margin: 0.9rem auto 1.1rem auto;
+      overflow-x: auto;
+    }
+    .property-card {
+      background: #ffffff;
+      border: 1px solid #e6e9ef;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      height: 100%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      font-size: 0.92rem;
+    }
+    .property-card .prop-title { font-weight: 700; color: #FF6C0C; margin-bottom: .3rem; }
+    .cmd-compare { margin-top: 1.5rem; }
+    .cmd-compare-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .cmd-compare-item { flex: 1 1 0; margin: 0; min-width: 0; }
+    .cmd-compare-item video {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #e6e9ef;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: block;
+    }
+    .cmd-compare-arrow, .cmd-compare-arrow-spacer { flex: 0 0 2.5rem; text-align: center; }
+    .cmd-compare-arrow {
+      font-size: 2.4rem;
+      line-height: 1;
+      color: #FF6C0C;
+      font-weight: 700;
+    }
+    .cmd-compare-caps { align-items: flex-start; margin-top: 0.5rem; margin-bottom: 1rem; }
+    .cmd-cap {
+      flex: 1 1 0;
+      min-width: 0;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #4a4a4a;
+      margin: 0;
+    }
+    .cmd-cap strong { color: #FF6C0C; }
+    .cmd-cap .hit { color: #c0392b; font-weight: 700; }
+    .cmd-cap .dodged { color: #1e8449; font-weight: 700; }
+    .figure-caption { font-size: .9rem; color: #4a4a4a; margin-top: .6rem; }
+    .video-caption {
+      font-size: .95rem;
+      color: #363636;
+      margin-top: .5rem;
+      padding: 0 1rem;
+    }
+    .mode-tag {
+      display: inline-block;
+      background: #fff1e6;
+      color: #d95f00;
+      border-radius: 6px;
+      padding: .1rem .5rem;
+      font-weight: 600;
+      font-size: .85rem;
+    }
+    .hw-video video, .mode-video video {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #e6e9ef;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: block;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.75rem;
+      flex-wrap: wrap;
+      margin: 0.75rem auto 1.1rem auto;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .stat-num { font-size: 2rem; font-weight: 800; color: #FF6C0C; line-height: 1.1; }
+    .stat-item .stat-label { font-size: .85rem; color: #4a4a4a; }
+    /* Hero banner: looping video behind the title, blurred + darkened
+       (the ::before teaser image is the fallback while the video loads / if it fails) */
+    .hero-banner { position: relative; overflow: hidden; }
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('static/images/banner.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      filter: blur(2.5px) brightness(0.55) saturate(1.05);
+      transform: scale(1.1);   /* hide blurred edges */
+      z-index: 0;
+    }
+    .hero-banner .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: blur(2.5px) brightness(0.55) saturate(1.05);
+      transform: scale(1.1);   /* hide blurred edges */
+      z-index: 0;
+    }
+    .hero-banner .hero-body { position: relative; z-index: 1; padding-top: 4.5rem; padding-bottom: 4.5rem; }
+    .hero-banner .subtitle,
+    .hero-banner .publication-authors,
+    .hero-banner .publication-authors a,
+    .hero-banner .publication-authors sup { color: #ffffff !important; }
+    .hero-banner .publication-authors a { text-decoration: underline; text-underline-offset: 2px; }
+    .hero-banner .publication-authors a:hover { color: #ffd9b3 !important; }
+    .hero-banner .button.is-dark { background: #ffffff; color: #1b1b1b; border: none; }
+    .hero-banner .button.is-dark:hover { background: #ffe7d3; color: #000; }
+    .brand-pacman {
+      color: #FF6C0C !important;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+    }
+    .title-logo {
+      height: 1.15em;
+      width: auto;
+      vertical-align: -0.22em;
+      margin-right: 0.28em;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.45));
+    }
+    /* Institution logos: white pill so the dark logos read on the dark banner */
+    .institution-logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 48px;
+      margin: 1.5rem auto 0.25rem auto;
+    }
+    .institution-logos img { height: 56px; width: auto; display: block; }
+    .institution-logos img.invert-white { filter: brightness(0) invert(1); }
+    .institution-logos img.logo-caltech { height: 68px; }
+    /* Funding logos in the footer */
+    .funding-title { font-weight: 600; color: #363636; margin-bottom: 0.9rem !important; }
+    .funding-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+    .funding-logos img { height: 46px; width: auto; display: block; }
+    .funding-note { font-size: 0.85rem; color: #6b7280; }
+    /* Interactive demo embed. The iframe is created on click, so a visitor who
+       never launches it downloads none of the demo's ~15 MB. */
+    .demo-frame {
+      position: relative; width: 100%; aspect-ratio: 16 / 10; min-height: 400px;
+      border-radius: 14px; overflow: hidden; background: #eef2f7;
+      box-shadow: 0 10px 34px rgba(15, 18, 22, 0.28);
+    }
+    .demo-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+    .demo-poster {
+      position: absolute; inset: 0; border: 0; padding: 0; width: 100%; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.9rem; background-size: cover; background-position: center 35%; font: inherit;
+    }
+    .demo-poster::before { content: ""; position: absolute; inset: 0; background: rgba(11, 14, 19, 0.66); }
+    .demo-poster > * { position: relative; }
+    .demo-launch {
+      display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.6rem;
+      border-radius: 999px; background: var(--primary-color); color: #fff;
+      font-weight: 700; font-size: 1.05rem; box-shadow: 0 6px 20px rgba(255, 108, 12, 0.4);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .demo-poster:hover .demo-launch { background: var(--primary-hover); transform: translateY(-2px); }
+    .demo-poster:focus-visible { outline: 3px solid var(--primary-color); outline-offset: 3px; }
+    .demo-headline { color: #fff; font-weight: 700; font-size: 1.15rem; }
+    .demo-sub { color: #cfd8e2; font-size: 0.86rem; max-width: 30rem; line-height: 1.45; }
+    .demo-bar {
+      display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem;
+      flex-wrap: wrap; margin-top: 0.7rem;
+    }
+    @media screen and (max-width: 768px) {
+      .demo-frame { aspect-ratio: 3 / 4; min-height: 460px; }
+      .demo-headline { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero hero-banner">
+    <video class="hero-bg" autoplay loop muted playsinline preload="auto" aria-hidden="true">
+      <source src="static/videos/title_banner.mp4" type="video/mp4">
+    </video>
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title brand-pacman"><img src="static/images/pacman_logo.png" alt="" class="title-logo">PAC-MAN</h1>
+            <h2 class="subtitle is-4" style="margin-top:-0.4rem;">Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball</h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="https://lzyang2000.github.io" target="_blank">Lizhi Yang</a>,</span>
+              <span class="author-block"><a href="https://junhengl.github.io" target="_blank">Junheng Li</a>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=TjWwqmwAAAAJ&hl=en" target="_blank">Aaron D. Ames</a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="http://www.bipedalrobotics.com" target="_blank">AMBER Lab, California Institute of Technology</a></span>
+            </div>
+
+            <div class="has-text-centered">
+              <div class="institution-logos">
+                <a href="http://www.bipedalrobotics.com" target="_blank" title="AMBER Lab">
+                  <img class="invert-white" src="static/images/amber_black.svg" alt="AMBER Lab">
+                </a>
+                <a href="https://www.caltech.edu" target="_blank" title="California Institute of Technology">
+                  <img class="logo-caltech" src="static/images/caltech_trans.png" alt="California Institute of Technology">
+                </a>
+              </div>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- TODO: replace XXXX.XXXXX with the real arXiv id once the paper is up -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/XXXX.XXXXX.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="https://github.com/lzyang2000/perceptive_cbf_rl" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present <strong>PAC-MAN</strong>, a perception-aware CBF-RL framework that couples control-barrier safety
+            with deployment-realistic onboard sensing for whole-body humanoid dodgeball. The deployed policy sees the
+            ball only as segmentation-masked depth from a head-mounted camera, while training-time CBF guidance
+            represents clearance to every body link and an adversarial motion prior regularizes the resulting evasive
+            reflexes. We evaluate on a controlled any-link contact benchmark with seeded throws in two regimes: single
+            throws and a deployment loop in which the robot walks back to its station and recovers between throws. On
+            this benchmark, the policy comes within a few points of a privileged state oracle: a fixed onboard camera
+            alone is adequate for evasion. We find that usable barrier structure depends on perceptual observability:
+            Joint-CBF gives the best performance with accurate ball states, degrades under fixed-camera observations
+            when used only as training guidance, and recovers with a ball-tracking gimbal or privileged runtime filter.
+            We therefore deploy a lightweight Link-CBF policy zero-shot on the Unitree G1 in the real world, where it
+            tolerates imperfect perception, succeeds on <strong>95%</strong> of throws, and uses semantic segmentation
+            to dodge different balls.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Interactive demo -->
+<section class="section" id="demo">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Try it in your browser</h2>
+
+        <div class="demo-frame" id="demoFrame">
+          <button class="demo-poster" id="demoPoster" type="button"
+                  style="background-image:url('static/videos/same_throw_link_ok_poster.jpg')"
+                  aria-label="Launch the interactive dodgeball demo">
+            <span class="demo-launch">
+              <i class="fas fa-play"></i> Launch interactive demo
+            </span>
+            <span class="demo-headline">Throw a ball at the robot</span>
+            <span class="demo-sub">
+              Runs entirely on your device &mdash; about 15&nbsp;MB downloads on launch, so nothing loads until
+              you click. A desktop browser gives the best experience.
+            </span>
+          </button>
+        </div>
+
+        <div class="demo-bar" id="demoBar" hidden>
+          <span>
+            <button class="button is-small is-rounded" id="demoFullscreen" type="button">
+              <span class="icon is-small"><i class="fas fa-expand"></i></span>
+              <span>Fullscreen</span>
+            </button>
+            <a class="button is-small is-rounded" href="demo/" target="_blank" rel="noopener">
+              <span class="icon is-small"><i class="fas fa-external-link-alt"></i></span>
+              <span>Open in new tab</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var frame = document.getElementById('demoFrame');
+    var poster = document.getElementById('demoPoster');
+    var bar = document.getElementById('demoBar');
+    var iframe = null;
+
+    function launch() {
+      if (iframe) return;
+      iframe = document.createElement('iframe');
+      iframe.title = 'PAC-MAN interactive dodgeball demo';
+      iframe.allow = 'fullscreen';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.src = 'demo/';
+      frame.appendChild(iframe);
+      poster.remove();
+      bar.hidden = false;
+
+      // Tell the demo to stop simulating while it is scrolled out of view, so it
+      // does not keep a core busy for the rest of the page.
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (!iframe.contentWindow) continue;
+            iframe.contentWindow.postMessage(
+              { pacmanDemo: entries[i].isIntersecting ? 'resume' : 'pause' }, '*'
+            );
+          }
+        }, { threshold: 0.05 }).observe(frame);
+      }
+    }
+
+    poster.addEventListener('click', launch);
+    document.getElementById('demoFullscreen').addEventListener('click', function () {
+      if (frame.requestFullscreen) frame.requestFullscreen();
+      else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+    });
+  })();
+</script>
+<!-- End interactive demo -->
+
+<!-- Hardware results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Zero-shot hardware deployment</h2>
+        <div class="stat-row">
+          <div class="stat-item"><div class="stat-num">19/20</div><div class="stat-label">hand throws dodged</div></div>
+          <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">falls</div></div>
+          <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">onboard perception</div></div>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            The fixed-camera Link-CBF policy transfers to the Unitree G1 with no fine-tuning. On the real robot, an
+            EfficientTAM segmenter masks the ZED depth image down to the same ball-only observation used in training,
+            and the robot walks back to its station and recovers between throws &mdash; the same deployment loop as the
+            simulation benchmark.
+          </p>
+        </div>
+        <div class="hw-video">
+          <video poster="static/videos/20throws_poster.jpg" autoplay loop controls muted playsinline preload="metadata">
+            <source src="static/videos/20throws.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption has-text-centered"><strong>20-throw hardware evaluation.</strong> 19 of 20 hand throws dodged (95%), 0 falls, with onboard segmentation and depth shown live.</p>
+        </div>
+        <div class="hw-video" style="margin-top:1.75rem;">
+          <video poster="static/videos/differentball_poster.jpg" autoplay loop muted playsinline preload="metadata">
+            <source src="static/videos/differentball.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption has-text-centered"><strong>Different balls, same policy.</strong> Because the policy sees the threat only as segmentation-masked depth, semantic segmentation makes perception ball-agnostic &mdash; the robot dodges balls it never saw in training.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End hardware results -->
+
+<!-- Method -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Perception-aware CBF-RL</h2>
+        <img src="static/images/main.png" alt="PAC-MAN system overview: head-mounted RGB-D sensing, human-inspired ball-only masked depth perception, CBF-guided training, and hardware execution."/>
+        <div class="content has-text-justified" style="margin-top:0.9rem;">
+          <p>
+            A ball is launched toward the humanoid, which must move every body link out of its path and stay upright
+            &mdash; using only proprioception and onboard depth at deployment. Safety is shaped at training time
+            through the reward
+          </p>
+          <div class="command-box has-text-centered">
+            $$ r_t \;=\; \underbrace{r^{\mathrm{core}}_t \;+\; r^{\mathrm{cbf}}_t}_{r^{\mathrm{task}}_t} \;+\; \lambda_{\mathrm{s}}\, r^{\mathrm{style}}_t, $$
+          </div>
+          <p>
+            where $r^{\mathrm{core}}$ is the pelvis-centered evasion term of prior humanoid dodgeball work,
+            $r^{\mathrm{style}}$ is the adversarial motion prior, and $r^{\mathrm{cbf}}$ carries the whole-body barrier
+            structure at one of two levels:
+          </p>
+        </div>
+        <div class="columns duo-cols">
+          <div class="column is-half">
+            <h3 class="title is-5 has-text-centered" style="margin-bottom:0.6rem;">Link-CBF <span style="font-weight:400;color:#6b7280;">(deployed)</span></h3>
+            <div class="content has-text-justified">
+              <p style="margin-bottom:0.4rem;">One clearance barrier per robot link,</p>
+              <div class="command-box has-text-centered">
+                $$ h_i \;=\; \lVert p^{b} - p_i \rVert - \bigl(\rho^{b} + \rho_i\bigr), $$
+              </div>
+              <p style="margin-bottom:0.4rem;">
+                the ball-to-link distance minus their combined radii, so the collision-free set is
+                $\mathcal{C}=\bigcap_i\{h_i \ge 0\}$. The reward penalizes violating the barrier condition
+                $\dot h_i + \alpha h_i \ge 0$ at the most-binding link:
+              </p>
+              <div class="command-box has-text-centered">
+                $$ r^{\mathrm{clear}} \;=\; \min_i\, \mathrm{clip}\bigl(\dot h_i + \alpha h_i,\; -c,\; 0\bigr). $$
+              </div>
+              <p>
+                The class-$\mathcal{K}$ term $\alpha h_i$ ramps the penalty up over the final approach rather than only
+                at contact. Link-CBF enters only through the training reward &mdash; it guides the policy toward the
+                safe set with nothing to enforce online, which is why it deploys as-is on hardware.
+              </p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <h3 class="title is-5 has-text-centered" style="margin-bottom:0.6rem;">Joint-CBF <span style="font-weight:400;color:#6b7280;">(guidance / privileged filter)</span></h3>
+            <div class="content has-text-justified">
+              <p style="margin-bottom:0.4rem;">
+                A joint-space module defends the most-threatened body point $i^{\star}$ with a squared-distance
+                barrier: enforcing $\dot h_{i^{\star}} \ge -\alpha h_{i^{\star}} + \delta$ yields one affine constraint
+                $\eta^{\top} v \le b$ on the joint velocity, and the safe command is the closed-form projection
+              </p>
+              <div class="command-box has-text-centered">
+                $$ v^{\star} \;=\; v^{\mathrm{des}} \;-\; \frac{\bigl[\,\eta^{\top} v^{\mathrm{des}} - b\,\bigr]_{+}}{\lVert \eta \rVert^{2}}\; \eta, $$
+              </div>
+              <p>
+                which leaves $v^{\mathrm{des}}$ untouched whenever the constraint already holds, and tightens via an
+                urgency margin $\delta$ as time-to-contact drops. During training it shapes $r^{\mathrm{cbf}}$ with a
+                correction cost on $\lVert v^{\star} - v^{\mathrm{des}} \rVert^{2}$ and a buffer cost against skimming
+                the keep-out boundary; kept active at test time (<strong>+filter</strong>), it needs privileged ball
+                states and serves as a simulation-only safety ceiling.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-multiline" style="margin-top:0.25rem;">
+          <div class="column is-one-third">
+            <div class="property-card has-text-left">
+              <div class="prop-title">Ball-only masked depth</div>
+              A segmenter masks the depth image down to the ball, pooled to a sparse 16&times;9 frame stack &mdash; the
+              exact representation EfficientTAM produces on the real robot, so the sim-to-real gap collapses to the
+              perception layer.
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="property-card has-text-left">
+              <div class="prop-title">Whole-body barriers</div>
+              CBF terms represent clearance to every link, not just the torso &mdash; the policy learns which links are
+              threatened and moves them out of the way, and the benchmark counts any-link contact.
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="property-card has-text-left">
+              <div class="prop-title">Human-like evasion</div>
+              An adversarial motion prior over retargeted human dodges regularizes the reflexes into crouches, leans,
+              sidesteps, and leaps; the safety structure itself comes from the CBF terms.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End method -->
+
+<!-- Emergent dodge modes -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Emergent dodge modes</h2>
+        <p class="has-text-centered content" style="max-width:720px;margin:0 auto 1.25rem auto;">
+          No evasion is scripted: from the barrier rewards and the motion prior, distinct whole-body dodge modes emerge
+          and are selected by where the throw is headed.
+        </p>
+        <div class="columns">
+          <div class="column is-one-third">
+            <div class="mode-video">
+              <video poster="static/videos/mode_duck_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/mode_duck.mp4" type="video/mp4">
+              </video>
+              <p class="video-caption has-text-centered"><span class="mode-tag">duck</span></p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="mode-video">
+              <video poster="static/videos/mode_sidestep_left_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/mode_sidestep_left.mp4" type="video/mp4">
+              </video>
+              <p class="video-caption has-text-centered"><span class="mode-tag">sidestep left</span></p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="mode-video">
+              <video poster="static/videos/mode_sidestep_right_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/mode_sidestep_right.mp4" type="video/mp4">
+              </video>
+              <p class="video-caption has-text-centered"><span class="mode-tag">sidestep right</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End emergent dodge modes -->
+
+<!-- Same throw, different policy -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Same throw, different policy</h2>
+        <div class="content has-text-justified">
+          <p>
+            On identical seeded throws, the barrier reward and the perception regime each decide hits. Without barrier
+            structure, a core-distance reward protects the torso but sacrifices the limbs; and the stronger Joint-CBF
+            guidance only pays off when perception keeps the ball observable &mdash; a fixed camera loses it, a
+            ball-tracking gimbal recovers it.
+          </p>
+        </div>
+        <div class="cmd-compare">
+          <div class="cmd-compare-row">
+            <div class="cmd-compare-item">
+              <video poster="static/videos/same_throw_none_hit_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/same_throw_none_hit.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="cmd-compare-arrow" aria-hidden="true">&rarr;</div>
+            <div class="cmd-compare-item">
+              <video poster="static/videos/same_throw_link_ok_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/same_throw_link_ok.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="cmd-compare-row cmd-compare-caps">
+            <p class="cmd-cap"><strong>Core distance reward only:</strong> <span class="hit">hit</span></p>
+            <div class="cmd-compare-arrow-spacer" aria-hidden="true"></div>
+            <p class="cmd-cap"><strong>Link-CBF reward:</strong> <span class="dodged">dodged</span></p>
+          </div>
+          <div class="cmd-compare-row">
+            <div class="cmd-compare-item">
+              <video poster="static/videos/same_throw_vision_hit_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/same_throw_vision_hit.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="cmd-compare-arrow" aria-hidden="true">&rarr;</div>
+            <div class="cmd-compare-item">
+              <video poster="static/videos/same_throw_gimbal_ok_poster.jpg" autoplay loop muted playsinline preload="metadata">
+                <source src="static/videos/same_throw_gimbal_ok.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="cmd-compare-row cmd-compare-caps">
+            <p class="cmd-cap"><strong>Fixed camera + Joint-CBF:</strong> <span class="hit">hit</span></p>
+            <div class="cmd-compare-arrow-spacer" aria-hidden="true"></div>
+            <p class="cmd-cap"><strong>Gimbal camera + Joint-CBF:</strong> <span class="dodged">dodged</span></p>
+          </div>
+          <p class="figure-caption has-text-centered" style="margin-top:0.75rem;">
+            Bottom row: both policies are trained with the Joint-CBF reward and differ only in perception.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End same throw, different policy -->
+
+<!-- BibTeX citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{yang2026pacman,
+  title   = {PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball},
+  author  = {Yang, Lizhi and Li, Junheng and Ames, Aaron D.},
+  year    = {2026},
+  note    = {Under review}
+}</code></pre>
+    </div>
+</section>
+<!-- End BibTeX citation -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p class="has-text-centered funding-title">This work is supported by:</p>
+          <div class="funding-logos">
+            <a href="https://www.dow.com/en-us.html" target="_blank" title="The Dow Chemical Company">
+              <img src="static/images/dow.svg" alt="The Dow Chemical Company">
+            </a>
+            <a href="https://www.tii.ae" target="_blank" title="Technology Innovation Institute">
+              <img src="static/images/tii.png" alt="Technology Innovation Institute">
+            </a>
+          </div>
+          <p class="has-text-centered funding-note">
+            The Dow Chemical Company project&nbsp;#227027AW, and in part by the Technology Innovation Institute (TII).
+          </p>
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </main>
+  </body>
+  </html>

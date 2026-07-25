@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PAC-MAN &mdash; interactive dodgeball demo</title>
+    <meta
+      name="description"
+      content="Run the deployed PAC-MAN humanoid dodgeball policy against MuJoCo physics
+               entirely in your browser: no server, no install."
+    />
+    <style>
+      :root {
+        --bg: #eef2f7;
+        --panel: rgba(255, 255, 255, 0.88);
+        --line: #ccd5e0;
+        --text: #17202b;
+        --muted: #5d6b7a;
+        --dodge: #d8402a;
+        --walk: #1c6fd4;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+        font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+      #app { position: fixed; inset: 0; }
+      canvas#view { width: 100%; height: 100%; display: block; touch-action: none; }
+
+      .panel { position: absolute; background: var(--panel); border: 1px solid var(--line);
+        border-radius: 10px; backdrop-filter: blur(8px);
+        box-shadow: 0 2px 10px rgba(23, 32, 43, 0.08); }
+
+      #hud { top: 12px; left: 12px; padding: 10px 12px; }
+
+      .stats { display: grid; grid-template-columns: auto auto;
+        gap: 2px 14px; font-variant-numeric: tabular-nums; font-size: 12px; }
+      .stats dt { color: var(--muted); }
+      .stats dd { margin: 0; text-align: right; }
+
+      #controls { bottom: 12px; left: 12px; right: 12px; padding: 10px 12px; display: flex;
+        flex-wrap: wrap; gap: 8px; align-items: center; }
+      button { font: inherit; font-size: 13px; color: var(--text); background: #f4f7fa;
+        border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+      button:hover:not(:disabled) { background: #e7edf4; border-color: #b3c0cf; }
+      button:active:not(:disabled) { transform: translateY(1px); }
+      button.primary { background: #1c6fd4; border-color: #1a63bd; color: #fff; }
+      button.primary:hover:not(:disabled) { background: #1a63bd; border-color: #17579f; }
+      button:disabled { opacity: 0.5; cursor: default; }
+      label.check { display: inline-flex; align-items: center; gap: 6px; color: var(--muted);
+        font-size: 12px; cursor: pointer; user-select: none; }
+      .spacer { flex: 1 1 auto; }
+      .hint { color: var(--muted); font-size: 11px; }
+      kbd { background: #f4f7fa; border: 1px solid var(--line); border-bottom-width: 2px;
+        border-radius: 4px; padding: 0 4px; font: inherit; font-size: 11px; }
+
+      #depth { top: 12px; right: 12px; padding: 10px; width: 208px; }
+      #depth h2 { margin: 0 0 6px; font-size: 12px; font-weight: 650; }
+      /* The depth readout stays dark: it is a sensor image where "far/empty" is
+         the dark end, and inverting it would misrepresent what the policy gets. */
+      #depth canvas { width: 100%; image-rendering: pixelated; border-radius: 4px;
+        border: 1px solid var(--line); display: block; background: #0d1117; }
+
+      #boot { position: absolute; inset: 0; display: grid; place-items: center;
+        background: var(--bg); z-index: 10; text-align: center; padding: 24px; }
+      #boot .bar { width: 220px; height: 3px; background: #d5dde6; border-radius: 2px;
+        overflow: hidden; margin: 14px auto 0; }
+      #boot .bar i { display: block; height: 100%; width: 0; background: var(--walk);
+        transition: width 0.25s ease; }
+      #boot .err { color: var(--dodge); max-width: 560px; text-align: left;
+        white-space: pre-wrap; font-family: ui-monospace, monospace; font-size: 12px; }
+
+      @media (max-width: 720px) {
+        #depth { display: none; }
+        #hud { padding: 8px 10px; }
+      }
+    </style>
+    <script type="module" crossorigin src="/perceptive_cbf_rl/demo/assets/index-DEJhKhSZ.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="view"></canvas>
+
+      <div id="hud" class="panel">
+        <dl class="stats">
+          <dt>Throws</dt><dd id="sThrows">0</dd>
+          <dt>Hit</dt><dd id="sHits">0</dd>
+          <dt>Avoided</dt><dd id="sAvoided">0</dd>
+          <dt>Policy</dt><dd id="sPolicy">&mdash;</dd>
+          <dt>Physics</dt><dd id="sPhys">&mdash;</dd>
+          <dt>Render</dt><dd id="sFps">&mdash;</dd>
+        </dl>
+      </div>
+
+      <div id="depth" class="panel">
+        <h2>Perception</h2>
+        <canvas id="depthCanvas" width="16" height="9"></canvas>
+      </div>
+
+      <div id="controls" class="panel">
+        <button id="btnThrow" class="primary">Throw ball</button>
+        <button id="btnReset">Reset</button>
+        <label class="check"><input type="checkbox" id="cbAuto" /> Auto-throw</label>
+        <div class="spacer"></div>
+        <span class="hint">
+          <kbd>Space</kbd> throw &middot; <kbd>R</kbd> reset &middot; drag to orbit
+        </span>
+      </div>
+
+      <div id="boot">
+        <div>
+          <div id="bootMsg">Loading MuJoCo&hellip;</div>
+          <div class="bar"><i id="bootBar"></i></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

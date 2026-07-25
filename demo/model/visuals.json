@@ -1,0 +1,776 @@
+{
+  "meshFiles": {
+    "pelvis": "pelvis.STL",
+    "pelvis_contour_link": "pelvis_contour_link.STL",
+    "left_hip_pitch_link": "left_hip_pitch_link.STL",
+    "left_hip_roll_link": "left_hip_roll_link.STL",
+    "left_hip_yaw_link": "left_hip_yaw_link.STL",
+    "left_knee_link": "left_knee_link.STL",
+    "left_ankle_pitch_link": "left_ankle_pitch_link.STL",
+    "left_ankle_roll_link": "left_ankle_roll_link.STL",
+    "right_hip_pitch_link": "right_hip_pitch_link.STL",
+    "right_hip_roll_link": "right_hip_roll_link.STL",
+    "right_hip_yaw_link": "right_hip_yaw_link.STL",
+    "right_knee_link": "right_knee_link.STL",
+    "right_ankle_pitch_link": "right_ankle_pitch_link.STL",
+    "right_ankle_roll_link": "right_ankle_roll_link.STL",
+    "waist_yaw_link": "waist_yaw_link_rev_1_0.STL",
+    "waist_roll_link": "waist_roll_link_rev_1_0.STL",
+    "torso_link": "torso_link_rev_1_0.STL",
+    "logo_link": "logo_link.STL",
+    "head_link": "head_link.STL",
+    "left_shoulder_pitch_link": "left_shoulder_pitch_link.STL",
+    "left_shoulder_roll_link": "left_shoulder_roll_link.STL",
+    "left_shoulder_yaw_link": "left_shoulder_yaw_link.STL",
+    "left_elbow_link": "left_elbow_link.STL",
+    "left_wrist_roll_link": "left_wrist_roll_link.STL",
+    "left_wrist_pitch_link": "left_wrist_pitch_link.STL",
+    "left_wrist_yaw_link": "left_wrist_yaw_link.STL",
+    "left_rubber_hand": "left_rubber_hand.STL",
+    "right_shoulder_pitch_link": "right_shoulder_pitch_link.STL",
+    "right_shoulder_roll_link": "right_shoulder_roll_link.STL",
+    "right_shoulder_yaw_link": "right_shoulder_yaw_link.STL",
+    "right_elbow_link": "right_elbow_link.STL",
+    "right_wrist_roll_link": "right_wrist_roll_link.STL",
+    "right_wrist_pitch_link": "right_wrist_pitch_link.STL",
+    "right_wrist_yaw_link": "right_wrist_yaw_link.STL",
+    "right_rubber_hand": "right_rubber_hand.STL"
+  },
+  "visuals": [
+    {
+      "body": "pelvis",
+      "mesh": "pelvis",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "pelvis",
+      "mesh": "pelvis_contour_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_hip_pitch_link",
+      "mesh": "left_hip_pitch_link",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_hip_roll_link",
+      "mesh": "left_hip_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_hip_yaw_link",
+      "mesh": "left_hip_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_knee_link",
+      "mesh": "left_knee_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_ankle_pitch_link",
+      "mesh": "left_ankle_pitch_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_ankle_roll_link",
+      "mesh": "left_ankle_roll_link",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_hip_pitch_link",
+      "mesh": "right_hip_pitch_link",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_hip_roll_link",
+      "mesh": "right_hip_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_hip_yaw_link",
+      "mesh": "right_hip_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_knee_link",
+      "mesh": "right_knee_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_ankle_pitch_link",
+      "mesh": "right_ankle_pitch_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_ankle_roll_link",
+      "mesh": "right_ankle_roll_link",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "waist_yaw_link",
+      "mesh": "waist_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "waist_roll_link",
+      "mesh": "waist_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "torso_link",
+      "mesh": "torso_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "torso_link",
+      "mesh": "logo_link",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0.0039635,
+        0,
+        -0.044
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "torso_link",
+      "mesh": "head_link",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0.0039635,
+        0,
+        -0.044
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_shoulder_pitch_link",
+      "mesh": "left_shoulder_pitch_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_shoulder_roll_link",
+      "mesh": "left_shoulder_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_shoulder_yaw_link",
+      "mesh": "left_shoulder_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_elbow_link",
+      "mesh": "left_elbow_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_wrist_roll_link",
+      "mesh": "left_wrist_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_wrist_pitch_link",
+      "mesh": "left_wrist_pitch_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_wrist_yaw_link",
+      "mesh": "left_wrist_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "left_wrist_yaw_link",
+      "mesh": "left_rubber_hand",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0.0415,
+        0.003,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_shoulder_pitch_link",
+      "mesh": "right_shoulder_pitch_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_shoulder_roll_link",
+      "mesh": "right_shoulder_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_shoulder_yaw_link",
+      "mesh": "right_shoulder_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_elbow_link",
+      "mesh": "right_elbow_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_wrist_roll_link",
+      "mesh": "right_wrist_roll_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_wrist_pitch_link",
+      "mesh": "right_wrist_pitch_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_wrist_yaw_link",
+      "mesh": "right_wrist_yaw_link",
+      "rgba": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "body": "right_wrist_yaw_link",
+      "mesh": "right_rubber_hand",
+      "rgba": [
+        0.2,
+        0.2,
+        0.2,
+        1
+      ],
+      "pos": [
+        0.0415,
+        -0.003,
+        0
+      ],
+      "quat": [
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

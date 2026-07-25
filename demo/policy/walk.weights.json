@@ -1,0 +1,114 @@
+{
+  "source": "walk_policy.onnx",
+  "inputDim": 384,
+  "outputDim": 29,
+  "eluAlpha": 1,
+  "tensors": [
+    {
+      "name": "obs_normalizer._mean",
+      "role": "mean",
+      "layer": null,
+      "shape": [
+        1,
+        384
+      ],
+      "offset": 0,
+      "count": 384
+    },
+    {
+      "name": "onnx::Div_24",
+      "role": "std",
+      "layer": null,
+      "shape": [
+        1,
+        384
+      ],
+      "offset": 384,
+      "count": 384
+    },
+    {
+      "name": "mlp.0.weight",
+      "role": "weight",
+      "layer": 0,
+      "shape": [
+        512,
+        384
+      ],
+      "offset": 768,
+      "count": 196608
+    },
+    {
+      "name": "mlp.0.bias",
+      "role": "bias",
+      "layer": 0,
+      "shape": [
+        512
+      ],
+      "offset": 197376,
+      "count": 512
+    },
+    {
+      "name": "mlp.2.weight",
+      "role": "weight",
+      "layer": 1,
+      "shape": [
+        256,
+        512
+      ],
+      "offset": 197888,
+      "count": 131072
+    },
+    {
+      "name": "mlp.2.bias",
+      "role": "bias",
+      "layer": 1,
+      "shape": [
+        256
+      ],
+      "offset": 328960,
+      "count": 256
+    },
+    {
+      "name": "mlp.4.weight",
+      "role": "weight",
+      "layer": 2,
+      "shape": [
+        128,
+        256
+      ],
+      "offset": 329216,
+      "count": 32768
+    },
+    {
+      "name": "mlp.4.bias",
+      "role": "bias",
+      "layer": 2,
+      "shape": [
+        128
+      ],
+      "offset": 361984,
+      "count": 128
+    },
+    {
+      "name": "mlp.6.weight",
+      "role": "weight",
+      "layer": 3,
+      "shape": [
+        29,
+        128
+      ],
+      "offset": 362112,
+      "count": 3712
+    },
+    {
+      "name": "mlp.6.bias",
+      "role": "bias",
+      "layer": 3,
+      "shape": [
+        29
+      ],
+      "offset": 365824,
+      "count": 29
+    }
+  ]
+}
