@@ -24,7 +24,7 @@ Built on [mjlab](https://github.com/mujocolab/mjlab) (MuJoCo Warp) with the AMP
 implementation adapted from [AMP_mjlab](https://github.com/ccrpRepo/AMP_mjlab),
 PPO from [rsl_rl](https://github.com/leggedrobotics/rsl_rl).
 
-<p align="center"><img src="media/system.png" alt="PAC-MAN system overview: head-mounted RGB-D sensing, ball-only masked depth perception, CBF-guided training, and hardware execution" width="820"/></p>
+<p align="center"><img alt="PAC-MAN system overview: head-mounted RGB-D sensing, ball-only masked depth perception, CBF-guided training, and hardware execution" width="3950" src="https://github.com/user-attachments/assets/a0ce1db3-ca60-46fa-b63b-887917b715f2" /></p>
 
 ### Emergent dodge modes
 
