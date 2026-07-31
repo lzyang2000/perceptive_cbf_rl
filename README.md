@@ -3,8 +3,8 @@
 Lizhi Yang, Junheng Li, Aaron D. Ames — Caltech AMBER Lab, 2026
 
 [[Website]](https://lzyang2000.github.io/perceptive_cbf_rl/)
-[[arXiv]](https://arxiv.org/abs/XXXX.XXXXX)
-[[Paper]](https://arxiv.org/pdf/XXXX.XXXXX)
+[[arXiv]](https://arxiv.org/abs/2607.28623)
+[[Paper]](https://arxiv.org/pdf/2607.28623)
 [[Live demo]](https://lzyang2000.github.io/perceptive_cbf_rl/demo/)
 
 Training pipeline, benchmark, and hardware deployment stack for PAC-MAN: a Unitree G1
@@ -124,9 +124,8 @@ If you use this code or build on PAC-MAN, please cite:
 @article{yang2026pacman,
   title   = {PAC-MAN: Perception-Aware CBF-RL for Whole-Body Safety in Humanoid Dodgeball},
   author  = {Yang, Lizhi and Li, Junheng and Ames, Aaron D.},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026},
-  note    = {arXiv ID to be added}
+  journal = {arXiv preprint arXiv:2607.28623},
+  year    = {2026}
 }
 ```
 
