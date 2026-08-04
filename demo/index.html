@@ -38,10 +38,11 @@
 
       #controls { bottom: 12px; left: 12px; right: 12px; padding: 10px 12px; display: flex;
         flex-wrap: wrap; gap: 8px; align-items: center; }
-      button { font: inherit; font-size: 13px; color: var(--text); background: #f4f7fa;
+      button, a.btn { font: inherit; font-size: 13px; color: var(--text); background: #f4f7fa;
         border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; cursor: pointer; }
-      button:hover:not(:disabled) { background: #e7edf4; border-color: #b3c0cf; }
-      button:active:not(:disabled) { transform: translateY(1px); }
+      a.btn { text-decoration: none; display: inline-block; }
+      button:hover:not(:disabled), a.btn:hover { background: #e7edf4; border-color: #b3c0cf; }
+      button:active:not(:disabled), a.btn:active { transform: translateY(1px); }
       button.primary { background: #1c6fd4; border-color: #1a63bd; color: #fff; }
       button.primary:hover:not(:disabled) { background: #1a63bd; border-color: #17579f; }
       button:disabled { opacity: 0.5; cursor: default; }
@@ -103,6 +104,7 @@
         <span class="hint">
           <kbd>Space</kbd> throw &middot; <kbd>R</kbd> reset &middot; drag to orbit
         </span>
+        <a class="btn" href="https://lzyang2000.github.io/perceptive_cbf_rl/">Project page</a>
       </div>
 
       <div id="boot">
