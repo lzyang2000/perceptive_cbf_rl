@@ -5,6 +5,7 @@ Lizhi Yang, Junheng Li, Aaron D. Ames — Caltech AMBER Lab, 2026
 [[Website]](https://lzyang2000.github.io/perceptive_cbf_rl/)
 [[arXiv]](https://arxiv.org/abs/2607.28623)
 [[Paper]](https://arxiv.org/pdf/2607.28623)
+[[Video]](https://youtu.be/Dcq5RWf62fw)
 [[Live demo]](https://lzyang2000.github.io/perceptive_cbf_rl/demo/)
 
 Training pipeline, benchmark, and hardware deployment stack for PAC-MAN: a Unitree G1
