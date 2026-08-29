@@ -25,6 +25,14 @@ import { makeRng } from './mathutil.js';
 
 export const MODE = { DODGE: 0, WALK: 1 };
 
+/**
+ * Ball radius (m) used by the "Fixed dodgeball size" toggle: a 15 cm ball, the
+ * radius the scene itself ships with (ball.py, 0.136 kg). It sits just above
+ * the 7.5 cm floor of the range training randomised over, so the policy stays
+ * in distribution.
+ */
+export const DODGEBALL_RADIUS = 0.0762;
+
 const ZERO3 = new Float32Array(3);
 
 export const ARBITER_DEFAULTS = {
@@ -39,6 +47,13 @@ export const ARBITER_DEFAULTS = {
   /** Per-throw ball radius, as training randomised it (dodge_env_cfgs.py). */
   randomizeBallRadius: true,
   ballRadiusRange: [0.075, 0.125],
+  /**
+   * Pin every throw to this radius instead of drawing one. Takes precedence
+   * over `randomizeBallRadius`; null (the default) leaves that behaviour, and
+   * leaves `randomizeBallRadius: false` meaning "keep whatever the model ships"
+   * as tools/sweep.mjs relies on.
+   */
+  fixedBallRadius: null,
 };
 
 export class Controller {
@@ -112,7 +127,9 @@ export class Controller {
   /** Throw a ball at the robot now. `forceHigh` pins duck (true) vs sidestep (false). */
   throwNow(forceHigh = undefined) {
     const s = this.sim.readState();
-    if (this.cfg.randomizeBallRadius) {
+    if (this.cfg.fixedBallRadius != null) {
+      this.sim.setBallRadius(this.cfg.fixedBallRadius);
+    } else if (this.cfg.randomizeBallRadius) {
       const [lo, hi] = this.cfg.ballRadiusRange;
       this.sim.setBallRadius(lo + this.rng() * (hi - lo));
     }

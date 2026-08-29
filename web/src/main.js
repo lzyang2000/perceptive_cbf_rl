@@ -10,7 +10,7 @@
 import load_mujoco from '@mujoco/mujoco';
 
 import { Sim } from './sim.js';
-import { Controller, MODE } from './controller.js';
+import { Controller, MODE, DODGEBALL_RADIUS } from './controller.js';
 import { loadMlp } from './mlp.js';
 import { Renderer } from './render.js';
 import { FRAME_DIM } from './depth.js';
@@ -140,6 +140,10 @@ async function main() {
 
   function throwBall(forceHigh) {
     if (pendingThrow) settleThrow(); // resolve the previous one first
+    // Read the toggle per throw rather than on change: the radius is a
+    // per-throw property anyway, and this stays correct when a browser restores
+    // a ticked checkbox across a reload.
+    ctl.cfg.fixedBallRadius = $('cbFixedBall').checked ? DODGEBALL_RADIUS : null;
     ctl.throwNow(forceHigh);
     prevBallVel = null;
     pendingThrow = { ticks: 0, hit: false };
